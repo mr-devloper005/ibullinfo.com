@@ -1,44 +1,227 @@
 /*
-  Editable global theme layer.
+  Global editable surface for the redesigned classified experience.
 
-  Safe for UI editors / AI tools:
-  - Full site background
-  - Global text color
-  - Selection color
-  - Scrollbar feel
-  - Article body typography accents
-
-  Do not add data fetching, scripts, or route logic here.
+  Keep this file purely presentational:
+  - background, scrollbar, selection, and motion
+  - article typography helpers
+  - shared card, ribbon, and slider utilities
 */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--slot4-page-bg) !important;
   color: var(--slot4-page-text) !important;
-  background-image: var(--slot4-body-gradient) !important;
+  background-color: var(--slot4-page-bg) !important;
+  background-image:
+    radial-gradient(circle at top left, rgba(1, 91, 104, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(245, 205, 58, 0.16), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #fcfbf8 24%, #f7f4ef 100%) !important;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(16, 24, 40, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 24, 40, 0.02) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent 82%);
+}
+
+img,
+svg {
+  display: block;
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--slot4-accent-fill) 22%, transparent);
+  background: rgba(1, 91, 104, 0.15);
   color: var(--slot4-page-text);
 }
 
 ::-webkit-scrollbar-track {
-  background: color-mix(in oklab, var(--slot4-page-bg) 88%, white);
+  background: rgba(16, 24, 40, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, var(--slot4-accent) 40%, transparent);
+  background: rgba(1, 91, 104, 0.35);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in oklab, var(--slot4-accent) 62%, transparent);
+  background: rgba(1, 91, 104, 0.55);
 }
 
-.article-content h2 {
-  color: var(--slot4-accent);
+@keyframes slot4-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slot4-slide-loop {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-12px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slot4-slow-pan {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+
+  50% {
+    transform: scale(1.03) translateX(-1.5%);
+  }
+
+  100% {
+    transform: scale(1) translateX(0);
+  }
+}
+
+@keyframes slot4-ribbon {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 120px 0;
+  }
+}
+
+.slot4-fade-up {
+  animation: slot4-fade-up 700ms ease both;
+}
+
+.slot4-slow-pan {
+  animation: slot4-slow-pan 16s ease-in-out infinite;
+}
+
+.slot4-slide-loop {
+  animation: slot4-slide-loop 8s ease-in-out infinite;
+}
+
+.slot4-ribbon {
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.28) 0, rgba(255, 255, 255, 0.28) 6px, transparent 6px, transparent 14px);
+  background-size: 22px 100%;
+  animation: slot4-ribbon 5s linear infinite;
+}
+
+.slot4-skyline {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.82) 94%, rgba(255, 255, 255, 1) 100%),
+    linear-gradient(90deg, rgba(1, 91, 104, 0.12) 0 1px, transparent 1px 100%);
+}
+
+.slot4-skyline::before,
+.slot4-skyline::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  pointer-events: none;
+  background-repeat: repeat-x;
+}
+
+.slot4-skyline::before {
+  height: 118px;
+  opacity: 0.55;
+  background-size: 116px 118px;
+  background-image:
+    linear-gradient(180deg, transparent 0 28px, rgba(19, 24, 38, 0.26) 28px 30px, transparent 30px 118px),
+    linear-gradient(90deg, transparent 0 18px, rgba(19, 24, 38, 0.2) 18px 20px, transparent 20px 116px),
+    radial-gradient(circle at 58px 46px, rgba(19, 24, 38, 0.24) 0 2px, transparent 2px 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 88%, transparent 100%);
+}
+
+.slot4-skyline::after {
+  height: 74px;
+  opacity: 0.95;
+  background-size: 94px 74px;
+  background-image:
+    linear-gradient(180deg, transparent 0 18px, rgba(1, 91, 104, 0.26) 18px 20px, transparent 20px 74px),
+    linear-gradient(90deg, transparent 0 14px, rgba(1, 91, 104, 0.18) 14px 16px, transparent 16px 94px);
+  mask-image: linear-gradient(180deg, transparent 0, #000 18%, #000 100%);
+}
+
+.slot4-card {
+  border: 1px solid rgba(18, 24, 40, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 55px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.slot4-card-soft {
+  border: 1px solid rgba(18, 24, 40, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.slot4-pill {
+  border: 1px solid rgba(18, 24, 40, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.slot4-marquee {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: slot4-ribbon 26s linear infinite;
+}
+
+.slot4-carousel {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.slot4-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.article-content {
+  line-height: 1.95;
+}
+
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+  color: #0f3f49;
+  letter-spacing: -0.04em;
 }
 
 .article-content a {
-  color: var(--slot4-accent-fill);
+  color: #0f6c7a;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.article-content p + p {
+  margin-top: 1rem;
+}
+
+.article-content ul,
+.article-content ol {
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+}
+
+.article-content li + li {
+  margin-top: 0.35rem;
 }

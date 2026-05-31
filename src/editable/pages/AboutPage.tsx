@@ -1,41 +1,37 @@
-import { PageShell } from "@/components/shared/page-shell";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { SITE_CONFIG } from "@/lib/site-config";
-import { pagesContent } from "@/editable/content/pages.content";
+import { SITE_CONFIG } from '@/lib/site-config'
+import { pagesContent } from '@/editable/content/pages.content'
+import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
 
 export default function AboutPage() {
   return (
-    <PageShell
-      title={`About ${SITE_CONFIG.name}`}
-      description={pagesContent.about.description}
-    >
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <Card className="border-border bg-card">
-          <CardContent className="space-y-4 p-6">
-            <Badge variant="secondary">{pagesContent.about.badge}</Badge>
-            <h2 className="text-2xl font-semibold text-foreground">
-              {pagesContent.about.title}
-            </h2>
-            <p className="text-sm text-muted-foreground">{pagesContent.about.description}</p>
-            {pagesContent.about.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="text-sm text-muted-foreground">
-                {paragraph}
-              </p>
-            ))}
-          </CardContent>
-        </Card>
-        <div className="space-y-4">
-          {pagesContent.about.values.map((value) => (
-            <Card key={value.title} className="border-border bg-card">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-foreground">{value.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{value.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </PageShell>
-  );
+    <EditableSiteShell>
+      <main className="bg-white text-[var(--slot4-page-text)]">
+        <section className="mx-auto max-w-[var(--editable-container,1440px)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+            <article className="rounded-[2.2rem] border border-black/8 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.07)] sm:p-8 lg:p-10">
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#005c6b]">{pagesContent.about.badge}</p>
+              <h1 className="mt-4 text-4xl font-black leading-[0.96] tracking-[-0.08em] sm:text-5xl lg:text-6xl">About {SITE_CONFIG.name}</h1>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-black/65">{pagesContent.about.description}</p>
+              <div className="mt-8 space-y-4">
+                {pagesContent.about.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="text-sm leading-7 text-black/65">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </article>
+            <aside className="grid gap-4">
+              {pagesContent.about.values.map((value, index) => (
+                <div key={value.title} className="rounded-[2rem] border border-black/8 bg-[#fbf9f4] p-6 shadow-[0_18px_60px_rgba(15,23,42,0.05)]">
+                  <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#005c6b]">0{index + 1}</p>
+                  <h2 className="mt-3 text-2xl font-black tracking-[-0.05em]">{value.title}</h2>
+                  <p className="mt-3 text-sm leading-7 text-black/60">{value.description}</p>
+                </div>
+              ))}
+            </aside>
+          </div>
+        </section>
+      </main>
+    </EditableSiteShell>
+  )
 }

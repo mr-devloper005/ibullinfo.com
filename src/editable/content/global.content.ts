@@ -3,47 +3,56 @@ import { slot4BrandConfig } from '@/editable/theme/brand.config'
 export const globalContent = {
   site: {
     name: slot4BrandConfig.siteName,
-    tagline: slot4BrandConfig.tagline || 'Independent reading platform',
+    tagline: 'Local listings, posts, and useful updates',
     domain: slot4BrandConfig.domain,
     baseUrl: slot4BrandConfig.baseUrl,
   },
   nav: {
-    tagline: 'Independent reading platform',
+    tagline: 'Browse, post, and discover',
     primaryLinks: [
-      { label: 'Articles', href: '/articles' },
-      { label: 'Visuals', href: '/image-sharing' },
-      { label: 'Listings', href: '/listings' },
-      { label: 'Contact', href: '/contact' },
+      { label: 'Listings', href: '/listing' },
+      { label: 'Classifieds', href: '/classified' },
+      { label: 'Articles', href: '/article' },
+      { label: 'Profiles', href: '/profile' },
+      { label: 'Files', href: '/pdf' },
     ],
     actions: {
-      primary: { label: 'Start exploring', href: '/' },
-      secondary: { label: 'Submit', href: '/contact' },
+      primary: { label: 'Post a free ad', href: '/contact' },
+      secondary: { label: 'Sign in', href: '/login' },
     },
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
-    description: 'A connected publishing surface for articles, visuals, listings, profiles, bookmarks, and downloadable resources.',
+    tagline: 'A neat place for browsing local content and useful pages.',
+    description: 'Explore posts, listings, documents, images, and profile pages through a cleaner front door designed for quick discovery.',
     columns: [
       {
-        title: 'Explore',
+        title: 'Browse',
         links: [
-          { label: 'Articles', href: '/articles' },
-          { label: 'Listings', href: '/listings' },
-          { label: 'Images', href: '/image-sharing' },
-          { label: 'PDF Library', href: '/pdf' },
+          { label: 'Listings', href: '/listing' },
+          { label: 'Classifieds', href: '/classified' },
+          { label: 'Articles', href: '/article' },
+          { label: 'Images', href: '/image' },
         ],
       },
       {
-        title: 'Site',
+        title: 'Platform',
+        links: [
+          { label: 'Profiles', href: '/profile' },
+          { label: 'PDFs', href: '/pdf' },
+          { label: 'Bookmarks', href: '/sbm' },
+          { label: 'Contact', href: '/contact' },
+        ],
+      },
+      {
+        title: 'Help',
         links: [
           { label: 'About', href: '/about' },
-          { label: 'Contact', href: '/contact' },
-          { label: 'Privacy', href: '/privacy' },
-          { label: 'Terms', href: '/terms' },
+          { label: 'Login', href: '/login' },
+          { label: 'Sign up', href: '/signup' },
         ],
       },
     ],
-    bottomNote: 'Built for clean discovery and connected publishing.',
+    bottomNote: 'Built for fast browsing and easy posting.',
   },
   commonLabels: {
     readMore: 'Read more',

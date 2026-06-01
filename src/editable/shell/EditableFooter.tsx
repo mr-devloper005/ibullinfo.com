@@ -1,61 +1,58 @@
-﻿import Link from 'next/link'
+'use client'
+
+import Link from 'next/link'
+import type { CSSProperties } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/site-config'
 import { globalContent } from '@/editable/content/global.content'
-import { brandLogoAlt, brandLogoDataUrl } from '@/editable/lib/brand-logo'
+import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 
 export function EditableFooter() {
+  const footerVars = { '--editable-footer-bg': 'var(--editable-page-bg, #fffaf3)', '--editable-footer-text': 'var(--editable-page-text, #241915)' } as CSSProperties
+  const taskLinks = SITE_CONFIG.tasks.filter((task) => task.enabled)
   const year = new Date().getFullYear()
-  const quickLinks = [
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Classified', href: '/classified' },
-  ] as const
+  const { session, logout } = useEditableLocalAuthSession()
 
   return (
-    <footer className="border-t border-black/5 bg-white text-[var(--slot4-page-text)]">
-      <div className="mx-auto max-w-[var(--editable-container,1440px)] px-4 py-8 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-4 border-t border-black/5 pt-8 text-center">
+    <footer style={footerVars} className="border-t border-[var(--editable-border)] bg-[var(--editable-footer-bg)] text-[var(--editable-footer-text)]">
+      <div className="mx-auto grid max-w-[var(--editable-container)] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
+        <div>
           <Link href="/" className="inline-flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-black/10 bg-black">
-              <img src={brandLogoDataUrl} alt={brandLogoAlt} className="h-full w-full object-cover" />
+            <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-[var(--editable-border)] bg-white">
+              <img src="/favicon.png?v=20260413" alt={SITE_CONFIG.name} className="h-9 w-9 object-contain" />
             </span>
-            <span className="text-lg font-black tracking-[-0.05em]">{SITE_CONFIG.name}</span>
+            <span className="text-lg font-black tracking-[-0.04em]">{SITE_CONFIG.name}</span>
           </Link>
+          <p className="mt-4 max-w-md text-sm leading-7 opacity-70">{globalContent.footer?.description || SITE_CONFIG.description}</p>
+        </div>
 
-          <p className="max-w-xl text-sm leading-7 text-black/65">{globalContent.footer.bottomNote}</p>
-
-          <nav
-            className="flex flex-wrap items-center justify-center gap-3 text-sm font-semibold text-black/70"
-            aria-label="Footer quick links"
-          >
-            {quickLinks.map((link, index) => (
-              <span key={link.href} className="inline-flex items-center gap-3">
-                <Link href={link.href} className="transition hover:text-[#005c6b]">
-                  {link.label}
-                </Link>
-                {index < quickLinks.length - 1 ? <span className="text-black/35">|</span> : null}
-              </span>
+        <div>
+          <h3 className="text-xs font-black uppercase tracking-[0.22em] opacity-55">Explore</h3>
+          <div className="mt-4 grid gap-2">
+            {taskLinks.map((task) => (
+              <Link key={task.key} href={task.route} className="inline-flex items-center gap-2 text-sm font-bold opacity-75 hover:opacity-100">
+                {task.label} <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
             ))}
-          </nav>
-
-          <p className="text-xs font-medium text-black/45">
-            Copyright {year} {SITE_CONFIG.name}. All rights reserved.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-black/45">
-            <Link href="/login" className="transition hover:text-[#005c6b]">
-              Login
-            </Link>
-            <span>|</span>
-            <Link href="/signup" className="transition hover:text-[#005c6b]">
-              Sign up
-            </Link>
-            <span>|</span>
-            <Link href="/contact" className="transition hover:text-[#005c6b]">
-              Contact
-            </Link>
           </div>
         </div>
+
+        <div>
+          <h3 className="text-xs font-black uppercase tracking-[0.22em] opacity-55">Site</h3>
+          <div className="mt-4 grid gap-2">
+            {[
+              ['About', '/about'],
+              ['Contact', '/contact'],
+              ...(session ? [['Create', '/create']] : [['Login', '/login'], ['Sign up', '/signup']]),
+            ].map(([label, href]) => (
+              <Link key={href} href={href} className="text-sm font-bold opacity-75 hover:opacity-100">{label}</Link>
+            ))}
+            {session ? <button type="button" onClick={logout} className="text-left text-sm font-bold opacity-75 hover:opacity-100">Logout</button> : null}
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-[var(--editable-border)] px-4 py-5 text-center text-xs font-bold opacity-55">
+        © {year} {SITE_CONFIG.name}. All rights reserved.
       </div>
     </footer>
   )

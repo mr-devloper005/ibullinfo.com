@@ -32,6 +32,8 @@ const allowedExact = new Set([
   'src/app/listings/[slug]/page.tsx',
   'src/app/image-sharing/[slug]/page.tsx',
   'src/app/profile/[username]/page.tsx',
+  'src/app/social-bookmarking/[slug]/page.tsx',
+  'src/app/classifieds/[slug]/page.tsx',
 ])
 const blockedPrefixes = ['src/lib/', 'src/config/', 'src/app/api/', 'src/components/', 'src/design/', '.github/', 'scripts/']
 const blockedExact = new Set(['Dockerfile', 'docker-compose.vps.yml', 'package.json', 'pnpm-lock.yaml', 'next.config.mjs'])

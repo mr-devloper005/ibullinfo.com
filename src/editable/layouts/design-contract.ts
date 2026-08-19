@@ -1,23 +1,23 @@
 import type { CSSProperties } from 'react'
 
 export const editableRootStyle = {
-  '--slot4-page-bg': '#ffffff',
-  '--slot4-page-text': '#121212',
-  '--slot4-panel-bg': '#faf8f4',
-  '--slot4-surface-bg': '#ffffff',
-  '--slot4-muted-text': '#5e5a55',
-  '--slot4-soft-muted-text': '#7a746b',
-  '--slot4-accent': '#005c6b',
-  '--slot4-accent-fill': '#005c6b',
-  '--slot4-accent-soft': '#dce9ea',
-  '--slot4-dark-bg': '#121212',
-  '--slot4-dark-text': '#ffffff',
-  '--slot4-media-bg': '#ece7de',
-  '--slot4-cream': '#fbf9f4',
-  '--slot4-warm': '#faf8f4',
-  '--slot4-lavender': '#e6eef0',
-  '--slot4-gray': '#f4f4f1',
-  '--slot4-body-gradient': 'linear-gradient(180deg, #ffffff 0%, #faf8f4 42%, #f4f2eb 100%)',
+  '--slot4-page-bg': '#040D12',
+  '--slot4-page-text': '#93B1A6',
+  '--slot4-panel-bg': '#183D3D',
+  '--slot4-surface-bg': '#0a1a1a',
+  '--slot4-muted-text': '#5C8374',
+  '--slot4-soft-muted-text': '#93B1A6',
+  '--slot4-accent': '#5C8374',
+  '--slot4-accent-fill': '#5C8374',
+  '--slot4-accent-soft': 'rgba(92,131,116,0.15)',
+  '--slot4-dark-bg': '#040D12',
+  '--slot4-dark-text': '#93B1A6',
+  '--slot4-media-bg': '#183D3D',
+  '--slot4-cream': '#0a1a1a',
+  '--slot4-warm': '#183D3D',
+  '--slot4-lavender': '#0f2626',
+  '--slot4-gray': '#0a1a1a',
+  '--slot4-body-gradient': 'linear-gradient(180deg, #040D12 0%, #061215 42%, #0a1a1a 100%)',
 } as CSSProperties
 
 export const editablePalette = {
@@ -40,10 +40,10 @@ export const editablePalette = {
   warmBg: 'bg-[var(--slot4-warm)]',
   lavenderBg: 'bg-[var(--slot4-lavender)]',
   grayBg: 'bg-[var(--slot4-gray)]',
-  border: 'border-black/[0.08]',
+  border: 'border-white/[0.08]',
   darkBorder: 'border-white/10',
-  shadow: 'shadow-[0_12px_40px_rgba(0,0,0,0.08)]',
-  shadowStrong: 'shadow-[0_18px_70px_rgba(0,0,0,0.14)]',
+  shadow: 'shadow-[0_12px_40px_rgba(0,0,0,0.25)]',
+  shadowStrong: 'shadow-[0_18px_70px_rgba(0,0,0,0.35)]',
   overlay: 'bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.62))]',
 } as const
 
@@ -72,7 +72,7 @@ export const editableDesignContract = {
   },
   button: {
     primary: `inline-flex items-center justify-center rounded-full ${editablePalette.darkBg} px-8 py-3.5 text-sm font-bold text-white transition hover:opacity-90`,
-    secondary: `inline-flex items-center justify-center rounded-full border ${editablePalette.border} ${editablePalette.surfaceBg} px-8 py-3.5 text-sm font-bold ${editablePalette.surfaceText} transition hover:bg-black/[0.03]`,
+    secondary: `inline-flex items-center justify-center rounded-full border ${editablePalette.border} ${editablePalette.surfaceBg} px-8 py-3.5 text-sm font-bold ${editablePalette.surfaceText} transition hover:bg-white/[0.05]`,
     accent: `inline-flex items-center justify-center rounded-full ${editablePalette.accentBg} px-8 py-3.5 text-sm font-bold text-white transition hover:opacity-90`,
   },
   media: {
